@@ -21,13 +21,15 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); }
+html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); overflow-x: hidden; max-width: 100%; }
 body {
   margin: 0;
   background: var(--color-black);
   color: var(--color-white);
   font: 400 1rem/1.65 var(--font-body);
   overflow-x: hidden;
+  max-width: 100%;
+  position: relative;
   /* grade tecnológica sutil no fundo */
   background-image:
     linear-gradient(var(--line) 1px, transparent 1px),
@@ -159,7 +161,12 @@ svg { width: 1.4rem; height: 1.4rem; flex: none; }
 .btn-whats:hover { box-shadow: 0 0 1.75rem color-mix(in srgb, var(--color-green) 50%, transparent); }
 
 /* ---------- Seções (fundos variados, largura total) ---------- */
-.hero, .section, .cta, .footer { --pad: max(var(--gutter), calc((100% - var(--max)) / 2 + var(--gutter))); padding-inline: var(--pad); }
+.hero, .section, .cta, .footer {
+  --pad: max(var(--gutter), calc((100% - var(--max)) / 2 + var(--gutter)));
+  padding-inline: var(--pad);
+  max-width: 100%;
+  overflow-x: clip;
+}
 .section { padding-block: clamp(3.5rem, 9vw, 6rem); position: relative; }
 .section > h2 { font-size: clamp(1.75rem, 5vw, 2.6rem); margin-bottom: 1.5rem; }
 main > section:nth-of-type(1) { background: radial-gradient(circle at 70% 45%, rgba(0,102,255,.18), transparent 50%); }
@@ -401,8 +408,23 @@ main > section:nth-of-type(even)::after { right: auto; left: 0; transform: scale
   .copy, .art, .nodes li, .info li { animation: reveal linear backwards; animation-timeline: view(); animation-range: entry 0% entry 40%; }
 }
 
-/* ---------- Mobile: menos efeitos decorativos ---------- */
+/* ---------- Mobile: menos efeitos decorativos e contenção de overflow ---------- */
 @media (max-width: 47.99rem) {
   .section::after, .hero::before { display: none; }
   .pc .chip::after { display: none; }
+  .hero-logo { width: min(74vw, 20rem); }
+  .hero-logo::after { inset: 0; }
+  .art { width: min(100%, 20rem); }
+  .h1, .s1 { left: 0.25rem; }
+  .h2, .s2 { right: 0.25rem; }
+  .h3, .s3 { left: 0.25rem; }
+  .h4, .s4 { right: 0.25rem; }
+  .c1 { left: 0.5rem; }
+  .c2 { right: 0.5rem; }
+  .c3 { left: 0.5rem; }
+  .c4 { right: 0.5rem; }
+  .hud { gap: 0.5rem; }
+  .hud li { padding: 0.85rem 0.5rem; font-size: 0.9rem; word-break: break-word; }
+  .nums { gap: 0.5rem 1rem; }
+  .cta img { width: 100%; }
 }
